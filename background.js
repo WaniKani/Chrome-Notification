@@ -20,13 +20,16 @@ function fetch_reviews() {
                 // Set the review count
                 set_review_count(json.requested_information.reviews_available);
 
+                // Set the next review date
+                var next_review = parse_next_review(json.requested_information.next_review_date);
+                set_next_review(next_review);
+
                 // Schedule the next refresh
-                var next_review = parseInt(String(json.requested_information.next_review_date + "000"), 10) + 1;
                 if (next_review > Date.now()) {
                     // Refresh when it's time to study
                     chrome.alarms.create("refresh", {when: next_review} );
                     chrome.alarms.get("refresh", function(alarm) {
-                        d = new Date(alarm.scheduledTime);
+                        var d = new Date(alarm.scheduledTime);
                         console.log("Refreshing at: " + d);
                     });
                 } else {
@@ -45,6 +48,25 @@ function fetch_reviews() {
             xhr.open("GET", url);
             xhr.send();
         }
+    });
+}
+
+
+function parse_next_review(datetime) {
+    // WaniKani doesn't include milliseconds in next_review_date, so we need
+    // to pad the datetime out to 13 characters
+    if (String(datetime).length === 10) {
+        return parseInt(String(datetime + "000"), 10) + 1;
+    } else {
+        return datetime;
+    }
+}
+
+// Set the time of the next review.
+function set_next_review(datetime) {
+    var new_datetime = parse_next_review(datetime);
+    chrome.storage.local.set({"next_review": new_datetime}, function() {
+        update_title();
     });
 }
 
@@ -91,6 +113,26 @@ function update_badge() {
             chrome.browserAction.setBadgeText({ text: String(data.reviews_available) });
         } else {
             chrome.browserAction.setBadgeText({ text: "" });
+        }
+    });
+}
+
+// Update the extension's title with the next review time.
+function update_title() {
+    chrome.storage.sync.get("api_key", function(data){
+        var name = chrome.i18n.getMessage("wanikaninotify_name");
+        if (data.api_key) {
+            chrome.storage.local.get("next_review", function(data) {
+                if (data.next_review > Date.now()) {
+                    var d = new Date(data.next_review);
+                    var new_title = name + " - Next Review: " + d.toString();
+                    chrome.browserAction.setTitle({"title": new_title});
+                } else {
+                    chrome.browserAction.setTitle({"title": name + " - Next Review: Now!"});
+                }
+            });
+        } else {
+            chrome.browserAction.setTitle({"title": name + " - Click to add your API key!"});
         }
     });
 }

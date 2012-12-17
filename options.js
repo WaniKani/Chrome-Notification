@@ -11,7 +11,10 @@ function save_options() {
     // Clear the storage so we don't persist old data.
     chrome.storage.sync.remove("api_key", function() {
 
-        // While we're at it, clear out our refresh alarm as well.
+        // Clear our local cached data
+        chrome.storage.local.clear();
+
+        // While we're at it, clear our refresh alarm as well.
         chrome.alarms.clear("refresh");
 
         // Test out the new api key.
@@ -33,15 +36,18 @@ function save_options() {
                 // Store the api key in Chrome Sync.
                 chrome.storage.sync.set({"api_key": api_key}, function() {
 
-                  // Update the badge, since we already have the json data
-                  chrome.extension.getBackgroundPage().set_review_count(json.requested_information.reviews_available);
+                    // Update the badge, since we already have the json data
+                    chrome.extension.getBackgroundPage().set_review_count(json.requested_information.reviews_available);
 
-                  // Update status to let user know options were saved.
-                  var status = document.getElementById("status");
-                  status.innerHTML = "Your options have been saved. Thanks, " + String(json.user_information.username) + "!";
-                  setTimeout(function() {
+                    // Update the title
+                    chrome.extension.getBackgroundPage().set_next_review(json.requested_information.next_review_date);
+
+                    // Update status to let user know options were saved.
+                    var status = document.getElementById("status");
+                    status.innerHTML = "Your options have been saved. Thanks, " + String(json.user_information.username) + "!";
+                    setTimeout(function() {
                     status.innerHTML = "";
-                  }, 4000);
+                    }, 4000);
                 });
             }
         };

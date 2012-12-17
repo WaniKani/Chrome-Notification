@@ -1,1 +1,10 @@
-{"wanikaninotify_name":{"message":"WaniKani Notifier"},"wanikaninotify_description":{"message":"Notifies you when you have more to study on WaniKani!"}}
+{
+    "wanikaninotify_name": {
+        "message": "WaniKani Notifier",
+        "description": "The title of the extension."
+    },
+    "wanikaninotify_description": {
+        "message": "Notifies you when you have more to study on WaniKani!",
+        "description": "The description of the extension."
+    }
+}
