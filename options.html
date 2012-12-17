@@ -1,6 +1,10 @@
+<!DOCTYPE HTML>
 <html>
-<head><title>WaniKani Notifier Options</title></head>
-<script src="options.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>WaniKani Notifier Options</title>
+    <script src="options.js"></script>
+</head>
 
 <body>
 
@@ -8,9 +12,28 @@
 To find your API key, go to <a href="http://www.wanikani.com" target="_blank">WaniKani</a>, click Menu, then click Settings (under Account). Copy the field labeled "Public API Key" into the box below.
 <br><br>
 <label for="api_key">Enter your API key here:</label>
-<input id="api_key" />
+<input id="api_key" size="32" />
 
 <br>
+<br>
+
+<label for="update_interval">Update interval:</label>
+<select id="update_interval">
+    <option value="1">1 minute</option>
+    <option value="5">5 minutes</option>
+    <option value="10">10 minutes</option>
+</select>
+
+<br>
+<br>
+
+<fieldset>
+<legend>Notifications:</legend>
+    <input name="notifications" type="radio" id="notif_on" value="on" />
+    <label for="notif_on">On</label>
+    <input name="notifications" type="radio" id="notif_off" value="off" />
+    <label for="notif_off">Off</label>
+</fieldset>
 <div id="status"></div>
 <button id="save">Save</button>
 </body>
