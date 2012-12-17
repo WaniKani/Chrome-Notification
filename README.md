@@ -20,7 +20,7 @@ All code is licensed under the [Apache License](http://www.apache.org/licenses/L
 * Added a content script to monitor the WaniKani review page. Sets review count to 0 as soon as your review is complete.
 * Added the option to display desktop notifications when you have new reviews. Defaults to off. Check the extension's options page.
 * Added an option to change how frequently the extension updates review count when there are reviews due. Defaults to 1 minute. When reviews are due, the API returns "reviews_available" as approximately the current datetime. We could check "reviews_available_next_hour" every hour to see if there are new reviews and allow the content script to get rid of old reviews. However, if the user reviews in a different environment, the extension will be out of date for as long as an hour. For now, the review count syncs with the API every few minutes since it's not too intensive.
-*
+* Mousing over the extension's icon shows you the time of your next review
 
 ###v0.1.1
 
