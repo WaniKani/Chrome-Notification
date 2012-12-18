@@ -15,7 +15,7 @@ All code is licensed under the [Apache License](http://www.apache.org/licenses/L
 
 ## Changelog
 
-###HEAD
+###v0.2
 
 * Added a content script to monitor the WaniKani review page. Sets review count to 0 as soon as your review is complete.
 * Added the option to display desktop notifications when you have new reviews. Defaults to off. Check the extension's options page.
