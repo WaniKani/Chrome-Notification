@@ -15,6 +15,10 @@ All code is licensed under the [Apache License](http://www.apache.org/licenses/L
 
 ## Changelog
 
+###v0.2.1
+
+* Updated review page monitor for new review page style
+
 ###v0.2
 
 * Added a content script to monitor the WaniKani review page. Sets review count to 0 as soon as your review is complete.
