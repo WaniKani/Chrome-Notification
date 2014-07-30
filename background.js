@@ -151,7 +151,7 @@ chrome.browserAction.onClicked.addListener(function() {
         if (result === "!") {
             chrome.tabs.create({url: "options.html"});
         } else {
-            chrome.tabs.create({url: "http://www.wanikani.com"});
+            chrome.tabs.create({url: "https://www.wanikani.com"});
         }
     });
 });
