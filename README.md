@@ -18,6 +18,7 @@ All code is licensed under the [Apache License](http://www.apache.org/licenses/L
 ###v0.2.2
 
 * Changed over all URL references to WaniKani to SSL
+* Rewrote review page to update when viewing reviews summary
 
 ###v0.2.1
 

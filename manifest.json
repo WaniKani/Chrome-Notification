@@ -9,7 +9,12 @@
   "options_page": "options.html",
   "content_scripts": [
     {
-      "matches": ["https://www.wanikani.com/review", "http://www.wanikani.com/review"],
+      "run_at": "document_idle",
+      "matches": [
+        "https://www.wanikani.com/review",
+        "https://www.wanikani.com/review/", 
+        "http://www.wanikani.com/review",
+        "http://www.wanikani.com/review/"],
       "js": ["review_page.js"]
     }
   ],
