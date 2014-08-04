@@ -1,6 +1,6 @@
 {
   "name": "__MSG_wanikaninotify_name__",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "manifest_version": 2,
   "description": "__MSG_wanikaninotify_description__",
   "default_locale": "en",
@@ -9,11 +9,16 @@
   "options_page": "options.html",
   "content_scripts": [
     {
-      "matches": ["http://www.wanikani.com/review"],
+      "run_at": "document_idle",
+      "matches": [
+        "https://www.wanikani.com/review",
+        "https://www.wanikani.com/review/", 
+        "http://www.wanikani.com/review",
+        "http://www.wanikani.com/review/"],
       "js": ["review_page.js"]
     }
   ],
-  "permissions": ["alarms", "storage", "notifications", "http://www.wanikani.com/api/*"],
+  "permissions": ["alarms", "storage", "notifications", "https://www.wanikani.com/api/*"],
   "browser_action": {
     "default_title": "WaniKani Notifier",
     "default_icon": "icon_128.png"
