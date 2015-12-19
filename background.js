@@ -161,6 +161,12 @@ chrome.browserAction.onClicked.addListener(function() {
     });
 });
 
+// When a notification is clicked:
+chrome.notifications.onClicked.addListener(function () {
+    chrome.tabs.create({url: "https://www.wanikani.com"});
+});
+
+
 // When a "refresh" alarm goes off, fetch new data.
 chrome.alarms.onAlarm.addListener(function(alarm) {
     if (alarm.name === "refresh") {
