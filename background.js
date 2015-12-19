@@ -94,14 +94,19 @@ function set_review_count(reviews) {
 
 // If notifications are enabled, display a notification.
 function show_notification() {
+    var opt = {
+      type: "basic",
+      title: "WaniKani",
+      message: "You have new reviews on WaniKani!",
+      iconUrl: "icon_128.png"
+    };
     chrome.storage.sync.get("notifications", function(data) {
         if (data.notifications && data.notifications === "on") {
-            var notification = webkitNotifications.createNotification(
-              "icon_128.png",
-              "WaniKani",
-              "You have new reviews on WaniKani!"
+            chrome.notifications.create(
+                "review",
+                opt,
+                function() {} // we don't need the callback, but it provides compatibility with old Chrome
             );
-            notification.show();
         }
     });
 }
