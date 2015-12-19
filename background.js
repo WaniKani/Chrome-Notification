@@ -57,9 +57,8 @@ function parse_next_review(datetime) {
     // to pad the datetime out to 13 characters
     if (String(datetime).length === 10) {
         return parseInt(String(datetime + "000"), 10) + 1;
-    } else {
-        return datetime;
     }
+    return datetime;
 }
 
 // Set the time of the next review.
