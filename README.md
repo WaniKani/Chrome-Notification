@@ -15,6 +15,13 @@ All code is licensed under the [Apache License](http://www.apache.org/licenses/L
 
 ## Changelog
 
+###DEVELOP
+
+* Updated API calls to v1.4
+* Changed API calls to https
+* Fixed Chrome notifications
+* Update badge as review progresses
+
 ###v0.2.1
 
 * Updated review page monitor for new review page style
