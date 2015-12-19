@@ -44,7 +44,7 @@ function fetch_reviews() {
                     });
                 }
             };
-            var url = "https://www.wanikani.com/api/v1.1/user/" + encodeURIComponent(api_key) + "/study-queue";
+            var url = "https://www.wanikani.com/api/v1.4/user/" + encodeURIComponent(api_key) + "/study-queue";
             xhr.open("GET", url);
             xhr.send();
         }
