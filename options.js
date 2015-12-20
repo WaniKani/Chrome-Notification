@@ -1,4 +1,4 @@
-// Copyright (c) 2012, Derek Guenther
+// Copyright (c) 2015, Derek Guenther
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -25,36 +25,20 @@ function save_options() {
 
             if (json.error) {
                 // If there's an error, update the badge.
-                chrome.browserAction.setBadgeText({text:"!"});
+                chrome.extension.getBackgroundPage().update_badge('!');
                 // Also, notify the user.
-                var status = document.getElementById("status");
-                status.innerHTML = "Sorry, that API key isn't valid. Please try again!";
-                setTimeout(function() {
-                  status.innerHTML = "";
-                }, 4000);
+                show_status('Sorry, that API key isn\'t valid. Please try again!');
             } else {
                 // Store the api key in Chrome Sync.
                 chrome.storage.sync.set({"api_key": api_key}, function() {
-
-                    // Update the badge, since we already have the json data
-                    chrome.extension.getBackgroundPage().set_review_count(json.requested_information.reviews_available);
-
-                    // Update the title
-                    chrome.extension.getBackgroundPage().set_next_review(json.requested_information.next_review_date);
-
                     // Update status to let user know options were saved.
-                    var status = document.getElementById("status");
-                    status.innerHTML = "Your options have been saved. Thanks, " + String(json.user_information.username) + "!";
-                    setTimeout(function() {
-                    status.innerHTML = "";
-                    }, 4000);
+                    show_status('Your options have been saved. Thanks, ' + String(json.user_information.username) + '!');
                 });
             }
         };
-        var url = "http://www.wanikani.com/api/v1.1/user/" + encodeURIComponent(api_key) + "/study-queue";
+        var url = "https://www.wanikani.com/api/v1.4/user/" + encodeURIComponent(api_key) + "/study-queue";
         xhr.open("GET", url);
         xhr.send();
-
     });
 
     // Save notification options.
@@ -63,7 +47,6 @@ function save_options() {
     save_update_interval();
 
     chrome.extension.getBackgroundPage().show_notification();
-
 }
 
 // Save update interval.
@@ -140,6 +123,14 @@ function restore_update_interval() {
             }
         }
     });
+}
+
+function show_status(status) {
+    var statusEl = document.getElementById('status');
+    statusEl.innerHTML = status;
+    setTimeout(function() {
+        statusEl.innerHTML = '';
+    }, 4000);
 }
 
 function bind_save() {
