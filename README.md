@@ -15,7 +15,7 @@ All code is licensed under the [Apache License](http://www.apache.org/licenses/L
 
 ## Changelog
 
-###DEVELOP
+###v0.3.0
 
 * Updated API calls to v1.4
 * Changed API calls to https
@@ -26,7 +26,7 @@ All code is licensed under the [Apache License](http://www.apache.org/licenses/L
 
 * Updated review page monitor for new review page style
 
-###v0.2
+###v0.2.0
 
 * Added a content script to monitor the WaniKani review page. Sets review count to 0 as soon as your review is complete.
 * Added the option to display desktop notifications when you have new reviews. Defaults to off. Check the extension's options page.
